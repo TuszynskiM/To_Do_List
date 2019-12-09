@@ -2,7 +2,6 @@ import React from 'react';
 import Task from './Task';
 
 const TaskList = (props) => {
-    console.log(props.tasks)
     const tasks = props.tasks.map(task => <Task key={task.id} id={task.id} text={task.description} date={task.date} finishTask={props.finishTask} removeTask={props.removeTask}/>)
     return (
         <div className="TaskListContainer">

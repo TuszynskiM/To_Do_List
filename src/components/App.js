@@ -6,6 +6,7 @@ import AddTask from './AddTask';
 
 class App extends Component {
   state = { 
+    index:3,
     tasks:
       [
         {
@@ -33,11 +34,27 @@ class App extends Component {
       console.log("remove task")
    }
 
+   handleAddTask = (description, date, priority) => {
+     const tasks = [...this.state.tasks];
+     const {index} = this.state;
+     tasks.push({
+       id: index,
+       description,
+       date,
+       active:true,
+       priority
+     });
+     this.setState({
+       tasks,
+       index: index +1,
+     });
+   }
+
   render() { 
     const {tasks} = this.state;
     return (
       <div>
-        <AddTask/>
+        <AddTask addTask={this.handleAddTask}/>
         <TaskList tasks={tasks} finishTask={this.handleFinishTask} removeTask={this.handleRemoveTask} />
       </div> 
     );
