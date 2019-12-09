@@ -7,6 +7,15 @@ class AddTask extends Component {
         priority: false,
      }
 
+     date = new Date();
+     nowDate = this.date.toISOString().slice(0,10);
+
+     componentDidMount(){
+         this.setState({
+             date: this.nowDate
+         })
+     }
+   
      handleInputValue = e => {
         this.setState({
             value: e.target.value
@@ -29,20 +38,15 @@ class AddTask extends Component {
     render() { 
         const {value, date, priority} = this.state;
         const AddTask = this.props.addTask
+        const maxDate = (parseInt(this.nowDate.slice(0,4)) + 1) + this.nowDate.slice(4);
         return (
             <div className="addTaskContainer">
-                <label>
-                    Do zrobienia:
-                    <input onChange={this.handleInputValue} value={value} type="text"></input>
-                </label>
-                <label>
-                    Data:
-                    <input onChange={this.handleDateValue} value={date} type="date"></input>
-                </label>
-                <label>
-                    priorytet 
-                    <input type="checkbox" value={priority} onChange={this.handleChangePriority}></input>
-                </label>
+                <label htmlFor="text">Do zrobienia:</label>
+                <input id="text" type="text" value={value} onChange={this.handleInputValue}></input>
+                <label htmlFor="date">Data:</label>
+                <input id="date"  type="date" min={this.nowDate} max={maxDate} value={date} onChange={this.handleDateValue}></input>
+                <label htmlFor="priority">ważne</label>
+                <input id="priority" type="checkbox" value={priority} onChange={this.handleChangePriority}></input>
                 <button onClick={() => AddTask(value, date, priority)}>Dodaj</button>
             </div>
         );

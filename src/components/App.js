@@ -37,6 +37,7 @@ class App extends Component {
    handleAddTask = (description, date, priority) => {
      const tasks = [...this.state.tasks];
      const {index} = this.state;
+     
      tasks.push({
        id: index,
        description,
@@ -44,6 +45,7 @@ class App extends Component {
        active:true,
        priority
      });
+
      this.setState({
        tasks,
        index: index +1,
