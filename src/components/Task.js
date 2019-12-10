@@ -5,9 +5,10 @@ const Task = (props) => {
     return ( 
         <li>
             <h3>{props.text}</h3>
-            <p>{props.date}</p>
-            <button onClick={() => removeTask(id)}>x</button>
-            <button onClick={() => finishTask(id)}>+</button>
+            <p>Data do zakoniecznia: {props.date}</p>
+            {!props.active && <p>Czas wykonania zadania {props.finishTime}</p>}
+            {props.active && <button onClick={() => removeTask(id)}>x</button>}
+            {props.active && <button onClick={() => finishTask(id)}>+</button>}
         </li> 
     );
 }

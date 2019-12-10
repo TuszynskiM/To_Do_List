@@ -15,6 +15,7 @@ class App extends Component {
           date: '20-02-2015',
           active: true,
           priority: false,
+          finishTime: ''
         },
         {
           id:2,
@@ -22,20 +23,27 @@ class App extends Component {
           date: '02-02-2015',
           active: true,
           priority: false,
+          finishTime: ''
         },
       ]
    }
 
+
+
    handleFinishTask = id => {
       const {tasks} = this.state;
       const finishTasks = [...tasks];
+      let finishDate = new Date();
+      finishDate = finishDate.toISOString().slice(0,10);
       finishTasks.forEach(
         task => {
           if(task.id === id){
-            task.active = false
+            task.active = false;
+            task.finishTime = finishDate;
           }
         }
       )
+      console.log(finishTasks)
       this.setState({
         tasks: finishTasks
       })
@@ -70,7 +78,6 @@ class App extends Component {
 
   render() { 
     const {tasks} = this.state;
-    console.log(tasks)
     return (
       <div>
         <AddTask addTask={this.handleAddTask}/>

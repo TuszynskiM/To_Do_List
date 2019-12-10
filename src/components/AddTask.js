@@ -35,9 +35,19 @@ class AddTask extends Component {
          )
      }
 
+     handleClearFields = () => { 
+        const {value, date, priority} = this.state;
+        this.props.addTask(value, date, priority)
+
+        this.setState({
+            value:"",
+            date: this.nowDate,
+            priority: false,
+         })
+     }
+
     render() { 
         const {value, date, priority} = this.state;
-        const AddTask = this.props.addTask
         const maxDate = (parseInt(this.nowDate.slice(0,4)) + 1) + this.nowDate.slice(4);
         return (
             <div className="addTaskContainer">
@@ -47,7 +57,7 @@ class AddTask extends Component {
                 <input id="date"  type="date" min={this.nowDate} max={maxDate} value={date} onChange={this.handleDateValue}></input>
                 <label htmlFor="priority">ważne</label>
                 <input id="priority" type="checkbox" value={priority} onChange={this.handleChangePriority}></input>
-                <button onClick={() => AddTask(value, date, priority)}>Dodaj</button>
+                <button onClick={this.handleClearFields} >Dodaj</button>
             </div>
         );
     }
